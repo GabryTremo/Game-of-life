@@ -129,6 +129,7 @@ void aggiorna_matrice(int **mat, int **new_mat, int size){
 }
 
 
+
 int main() {
 	
 	int *pInitCond = NULL;
@@ -137,6 +138,7 @@ int main() {
 	int size = 100;
 	int max_iter = 10;
 	int cont = 0;
+	
 	
 	
 	mat = new int*[size];
@@ -165,12 +167,16 @@ int main() {
 	stampa_matrice(mat);
 	
 	while(qualcuno_vivo(mat)==true && cont<max_iter){
+		
+		
 		aggiorna_matrice(mat, new_mat, size);
 		std::cout<<"\n";
 		stampa_matrice(new_mat); 
+		
 		for (int i = 0; i < size; i++) {
 			for (int j=0; j<size; j++){
-				new_mat[i][j] = mat[i][j];
+				mat[i][j] = new_mat[i][j];
+				
 			}
 		}
 		cont++;
