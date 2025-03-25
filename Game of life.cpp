@@ -9,7 +9,7 @@ void crea_matrice(int **mat, int *pInitCond, int init_cond_size){
 		std::fill(mat[i], mat[i]+100, 0);
 	}
 	
-	for(int j=0; j<init_cond_size; j++){
+	for(int j=0; j<2*init_cond_size; j+=2){
 		mat[pInitCond[j]][pInitCond[j+1]]=1;
 	}
 	
@@ -154,23 +154,25 @@ int main() {
 	std::cin>>init_cond_size;
 	pInitCond = new int[2*init_cond_size];
 	std::cout<<"Inserisci le coordinate delle cellule vive iniziali:\n";
-	for (int i=0; i<init_cond_size; i++){
+	for (int i=0; i<2*init_cond_size; i++){
 		std::cin>>pInitCond[i];
-		std::cin>>pInitCond[i+1];
 	}
 	
-	crea_matrice(mat, pInitCond, init_cond_size);
-	new_mat = mat;	
+	crea_matrice(mat, pInitCond, init_cond_size);	
 	
 	delete[] pInitCond;
 	
 	stampa_matrice(mat);
 	
-	while(qualcuno_vivo(new_mat)==true && cont<=max_iter){
+	while(qualcuno_vivo(mat)==true && cont<max_iter){
 		aggiorna_matrice(mat, new_mat, size);
 		std::cout<<"\n";
-		stampa_matrice(new_mat);
-		new_mat = mat;
+		//stampa_matrice(new_mat); 
+		for (int i = 0; i < size; i++) {
+			for (int j=0; j<size; j++){
+				new_mat[i][j] = mat[i][j];
+			}
+		}
 		cont++;
 	}
 	
