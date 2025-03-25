@@ -83,8 +83,8 @@ void controlla_vicini(int **mat, int **adj_mat, int size){
 	}
 	*/
 	
-	for (int i=0; i<size-1; i++){
-		for (int j=0; j<size-1; j++){
+	for (int i=0; i<size; i++){
+		for (int j=0; j<size; j++){
 			adj_mat[i][j] = mat[(100+i-1)%100][(100+j-1)%100] + mat[(100+i-1)%100][j] + mat[(100+i-1)%100][(j+1)%100] +
 							mat[i][(100+j-1)%100] + mat[i][(j+1)%100] +
 							mat[(i+1)%100][(100+j-1)%100] + mat[(i+1)%100][j] + mat[(i+1)%100][(j+1)%100];
@@ -167,7 +167,7 @@ int main() {
 	while(qualcuno_vivo(mat)==true && cont<max_iter){
 		aggiorna_matrice(mat, new_mat, size);
 		std::cout<<"\n";
-		//stampa_matrice(new_mat); 
+		stampa_matrice(new_mat); 
 		for (int i = 0; i < size; i++) {
 			for (int j=0; j<size; j++){
 				new_mat[i][j] = mat[i][j];
